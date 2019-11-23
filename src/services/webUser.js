@@ -3,10 +3,8 @@ import { getQueryPath } from '@/utils/utils';
 import { parseSearchResult } from '@/utils/search';
 
 export async function searchPageList(params = {}) {
-  // const url = getQueryPath('/api/userInfo/pageList', params);
-  // console.log(url)
-  // return request(url).then(res => parseSearchResult(res));
-  return request(getQueryPath('/api/sample', params)).then(res => parseSearchResult(res));
+  const url = getQueryPath('/api/userInfo/pageList', params);
+  return request(url).then(res => parseSearchResult(res));
 }
 
 // export async function getSample(id) {

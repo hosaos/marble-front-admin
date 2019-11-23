@@ -65,6 +65,11 @@ export default {
   'menu.sample.edit': '修改示例',
   'menu.sample.list': '示例列表',
 
+  'menu.webUser': '用户管理',
+  'menu.webUser.new': '新建后台用户',
+  'menu.webUser.edit': '修改后台用户',
+  'menu.webUser.list': '后台用户列表',
+
   'app.login.message-invalid-credentials': '账户或密码错误（admin/888888）',
   'app.login.message-invalid-verification-code': '验证码错误',
   'app.login.tab-login-credentials': '账户密码登录',

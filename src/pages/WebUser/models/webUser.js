@@ -4,8 +4,8 @@ import { searchPageList } from '@/services/webUser';
 
 const initialState = function getInitialState() {
   return {
-    entity: {},
-    pager: {
+    webUserEntity: {},
+    webUserList: {
       list: [],
       pagination: {},
     },
@@ -34,7 +34,7 @@ export default {
     //     yield call(saveSample, payload);
     //
     //     message.success('保存成功');
-    //     yield put(routerRedux.push('/sample/list'));
+    //     yield put(routerRedux.push('/webUser/list'));
     //   } catch (err) {
     //     message.error('保存失败');
     //   }
@@ -56,13 +56,13 @@ export default {
     updateEntity(state, action) {
       return {
         ...state,
-        entity: action.payload || initialState().entity,
+        webUserEntity: action.payload || initialState().webUserEntity,
       };
     },
     updateList(state, action) {
       return {
         ...state,
-        pager: action.payload || initialState().pager,
+        webUserList: action.payload || initialState().webUserList,
       };
     },
   },

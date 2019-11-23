@@ -1,29 +1,12 @@
 export function parseSearchResult(response) {
-  const res = { ...response };
-  const pagination = res.data && res.data.pagination;
-
-  if (!pagination) {
-    return response;
-  }
-
-  const {
-    pageNo: current = 1,
-    pageSize = 10,
-    order: [firstOrder] = [],
-    orderBy: [firstOrderBy] = [],
-    total,
-  } = pagination;
-
-  res.data.pagination = {
-    current,
-    pageSize,
-    total,
+  const res = {
+    list: response.records,
+    pagination: {
+      current: response.current,
+      pageSize: response.size,
+      total: response.total,
+    },
   };
-
-  if (firstOrder && firstOrderBy) {
-    res.data.pagination.sortColumn = firstOrderBy;
-    res.data.pagination.sortOrder = firstOrder.toLowerCase() === 'desc' ? 'descend' : 'ascend';
-  }
 
   return res;
 }

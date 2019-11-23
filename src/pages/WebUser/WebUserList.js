@@ -25,7 +25,6 @@ class WebUserList extends PureComponent {
     {
       title: 'ID',
       dataIndex: 'id',
-      sorter: true,
     },
     {
       title: '姓名',
@@ -34,6 +33,14 @@ class WebUserList extends PureComponent {
     {
       title: '手机号',
       dataIndex: 'mobile',
+    },
+    {
+      title: '角色',
+      dataIndex: 'role',
+    },
+    {
+      title: '创建时间',
+      dataIndex: 'createdAt',
     },
     {
       title: '操作',
@@ -131,12 +138,12 @@ class WebUserList extends PureComponent {
       <Form layout="inline">
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
-            <FormItem label="ID">
-              {getFieldDecorator('id')(<Input placeholder="精确查询" />)}
+            <FormItem label="手机号">
+              {getFieldDecorator('mobile')(<Input placeholder="精确查询" />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
-            <FormItem label="名称">
+            <FormItem label="姓名">
               {getFieldDecorator('name')(<Input placeholder="支持模糊查询" />)}
             </FormItem>
           </Col>
@@ -153,9 +160,7 @@ class WebUserList extends PureComponent {
     const { selectedRows } = this.state;
 
     return (
-      <PageHeaderWrapper
-        title="后台用户列表"
-      >
+      <PageHeaderWrapper>
         <Card bordered={false}>
           <StandardQueryList
             form={this.renderQueryForm()}
