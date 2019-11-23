@@ -91,7 +91,7 @@ class WebUserForm extends PureComponent {
               })(<Input placeholder="姓名" />)}
             </FormItem>
             <FormItem {...formItemLayout} label="密码">
-              {getFieldDecorator('paswwword', {
+              {getFieldDecorator('password', {
                 initialValue: webUserEntity.name,
                 rules: [
                   {
