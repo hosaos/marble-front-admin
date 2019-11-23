@@ -88,6 +88,7 @@ class WebUserList extends PureComponent {
     const { dispatch } = this.props;
     const { formValues } = this.state;
 
+
     const params = serializeSearchParam(pagination, formValues, filters, sorter);
 
     dispatch({
@@ -123,7 +124,7 @@ class WebUserList extends PureComponent {
       dispatch({
         type: 'webUser/search',
         payload: {
-          filter: JSON.stringify(values),
+          ...values,
         },
       });
     });

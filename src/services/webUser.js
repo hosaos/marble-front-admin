@@ -11,13 +11,13 @@ export async function searchPageList(params = {}) {
 //   return request(`/api/sample/${id}`);
 // }
 //
-// export async function saveSample(sample) {
-//   if (sample.id) {
-//     return request(`/api/sample/${sample.id}`, {
-//       method: 'PUT',
-//       body: sample,
-//     });
-//   }
+export async function modifyWebUser(webUser) {
+  return request(`/api/userInfo/saveOrUpdate`, {
+    method: 'POST',
+    body: webUser,
+  });
+}
+
 //   return request(`/api/sample`, {
 //     method: 'POST',
 //     body: sample,

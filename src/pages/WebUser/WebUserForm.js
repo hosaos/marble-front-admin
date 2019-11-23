@@ -1,15 +1,16 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import router from 'umi/router';
-import { Form, Input, Button, Card } from 'antd';
+import { Form, Input, Button, Card, Select } from 'antd';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import { formItemLayout, formSubmitLayout } from '@/constants/layout.form';
 
 const FormItem = Form.Item;
+const { Option } = Select;
 
 @connect(({ webUser, loading }) => ({
   webUser,
-  submitting: loading.effects['webUser/saveWebUser'],
+  submitting: loading.effects['webUser/modifyWebUser'],
 }))
 @Form.create()
 class WebUserForm extends PureComponent {
@@ -51,7 +52,7 @@ class WebUserForm extends PureComponent {
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         dispatch({
-          type: 'webUser/saveWebUser',
+          type: 'webUser/modifyWebUser',
           payload: {
             id,
             ...values,
@@ -70,7 +71,7 @@ class WebUserForm extends PureComponent {
     const { isNew, id } = this.state;
 
     return (
-      <PageHeaderWrapper title={isNew ? '新建示例' : '修改示例'} content="一个基础的表单页面。">
+      <PageHeaderWrapper title={isNew ? '新建后台用户' : '修改后台用户'}>
         <Card bordered={false}>
           <Form onSubmit={this.handleSubmit} hideRequiredMark style={{ marginTop: 8 }}>
             {!isNew && (
@@ -78,23 +79,60 @@ class WebUserForm extends PureComponent {
                 <span className="ant-form-text">{id}</span>
               </FormItem>
             )}
-            <FormItem {...formItemLayout} label="名称">
+            <FormItem {...formItemLayout} label="姓名">
               {getFieldDecorator('name', {
                 initialValue: webUserEntity.name,
                 rules: [
                   {
                     required: true,
-                    message: '名称为必填项',
+                    message: '姓名为必填项',
                   },
                 ],
-              })(<Input placeholder="示例的名称字段" />)}
+              })(<Input placeholder="姓名" />)}
             </FormItem>
-            <FormItem {...formItemLayout} label="时间">
-              {getFieldDecorator('time', {
-                initialValue: webUserEntity.time || '2019-01-01 00:00:00',
-                rules: [],
-              })(<Input placeholder="示例的时间字段" />)}
+            <FormItem {...formItemLayout} label="密码">
+              {getFieldDecorator('paswwword', {
+                initialValue: webUserEntity.name,
+                rules: [
+                  {
+                    required: true,
+                    message: '姓名为必填项',
+                  },
+                ],
+              })(<Input placeholder="密码" />)}
             </FormItem>
+            <FormItem {...formItemLayout} label="手机号">
+              {getFieldDecorator('mobile', {
+                initialValue: webUserEntity.name,
+                rules: [
+                  {
+                    required: true,
+                    message: '手机号为必填项',
+                  },
+                ],
+              })(<Input placeholder="姓名" />)}
+            </FormItem>
+            <FormItem {...formItemLayout} label="角色">
+              {getFieldDecorator('role', {
+                rules: [
+                  {
+                    required: true,
+                    message: '请选择用户角色',
+                  },
+                ],
+              })(
+                <Select
+                  showSearch
+                  style={{ width: 200 }}
+                  placeholder="请选择用户角色"
+                >
+                  <Option value="1">代理公司</Option>
+                  <Option value="2">加工厂</Option>
+                  <Option value="3">矿山</Option>
+                </Select>
+              )}
+            </FormItem>
+
             <FormItem {...formSubmitLayout} style={{ marginTop: 32 }}>
               <Button type="primary" onClick={() => this.handleSubmit()} loading={submitting}>
                 提交

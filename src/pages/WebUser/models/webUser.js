@@ -1,6 +1,6 @@
 import { routerRedux } from 'dva/router';
 import { message } from 'antd';
-import { searchPageList } from '@/services/webUser';
+import { searchPageList,modifyWebUser } from '@/services/webUser';
 
 const initialState = function getInitialState() {
   return {
@@ -29,17 +29,17 @@ export default {
     //     message.error('获取详情失败');
     //   }
     // },
-    // *saveSample({ payload }, { call, put }) {
-    //   try {
-    //     yield call(saveSample, payload);
-    //
-    //     message.success('保存成功');
-    //     yield put(routerRedux.push('/webUser/list'));
-    //   } catch (err) {
-    //     message.error('保存失败');
-    //   }
-    // },
-    *search({ payload }, { call, put }) {
+    *modifyWebUser({ payload }, { call, put }) {
+      try {
+        yield call(modifyWebUser, payload);
+
+        message.success('保存成功');
+        yield put(routerRedux.push('/webUser/list'));
+      } catch (err) {
+        message.error('保存失败');
+      }
+    },
+    * search({ payload = { pageIndex: 1, pageSize: 10 } }, { call, put }) {
       try {
         const response = yield call(searchPageList, payload);
         yield put({

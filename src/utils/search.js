@@ -31,7 +31,7 @@ export function formatFormValues(formValues) {
 }
 
 export function serializeSearchParam(pagination = {}, query = {}, filters = {}, sorter = {}) {
-  const { current: pageNo = 1, pageSize = 10 } = pagination;
+  const { current: pageIndex = 1, pageSize = 10 } = pagination;
   const filterValues = Object.keys(filters).reduce((result, key) => {
     const nextResult = { ...result };
     const filterValue = filters[key] || [];
@@ -41,22 +41,33 @@ export function serializeSearchParam(pagination = {}, query = {}, filters = {}, 
     }
     return nextResult;
   }, {});
-  const filter = {
-    ...query,
-    ...filterValues,
-  };
-  const page = {
-    pageNo,
+  const result = {
+    pageIndex,
     pageSize,
-  };
-
-  if (sorter.field) {
-    page.orderBy = sorter.field;
-    page.order = sorter.order === 'descend' ? 'desc' : 'asc';
+    ...query,
+    ...filterValues
   }
+  return result;
+  // const filter = {
+  //   ...query,
+  //   ...filterValues,
+  // };
+  // const page = {
+  //   pageNo,
+  //   pageSize,
+  // };
+  //
+  // if (sorter.field) {
+  //   page.orderBy = sorter.field;
+  //   page.order = sorter.order === 'descend' ? 'desc' : 'asc';
+  // }
+  // return {
+  //   page,
+  //   filter
+  // };
 
-  return {
-    page: JSON.stringify(page),
-    filter: JSON.stringify(filter),
-  };
+  // return {
+  //   page: JSON.stringify(page),
+  //   filter: JSON.stringify(filter),
+  // };
 }
