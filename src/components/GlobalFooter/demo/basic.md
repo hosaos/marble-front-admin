@@ -32,7 +32,7 @@ const links = [
 
 const copyright = (
   <div>
-    Copyright <Icon type="copyright" /> 2019 Yo Antd Pro All Rights Reserved
+    Copyright <Icon type="copyright" /> 2019 Antd Pro All Rights Reserved
   </div>
 );
 

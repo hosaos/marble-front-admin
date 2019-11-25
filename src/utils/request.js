@@ -119,6 +119,8 @@ export default function request(url, option) {
     }
   }
 
+
+
   const expirys = options.expirys && 60;
   // options.expirys !== false, return the cache,
   if (options.expirys !== false) {
@@ -134,6 +136,10 @@ export default function request(url, option) {
       sessionStorage.removeItem(`${hashcode}:timestamp`);
     }
   }
+  newOptions.headers = {
+    'X-TOKEN': window.localStorage.getItem("token"),
+    ...newOptions.headers,
+  };
   return fetch(url, newOptions)
     .then(checkStatus)
     .then(response => cachedSave(response, hashcode))

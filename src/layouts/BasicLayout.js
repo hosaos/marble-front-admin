@@ -96,9 +96,9 @@ class BasicLayout extends React.PureComponent {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    // dispatch({
-    //   type: 'user/fetchCurrent',
-    // });
+    dispatch({
+      type: 'user/fetchCurrent',
+    });
     dispatch({
       type: 'setting/getSetting',
     });
@@ -178,13 +178,13 @@ class BasicLayout extends React.PureComponent {
     const currRouterData = this.matchParamsPath(pathname);
 
     if (!currRouterData) {
-      return 'Yo Antd Pro';
+      return 'Antd Pro';
     }
     const message = formatMessage({
       id: currRouterData.locale || currRouterData.name,
       defaultMessage: currRouterData.name,
     });
-    return `${message} - Yo Antd Pro`;
+    return `${message} - Antd Pro`;
   };
 
   getLayoutStyle = () => {

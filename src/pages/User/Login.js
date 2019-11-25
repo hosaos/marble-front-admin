@@ -107,11 +107,6 @@ class LoginPage extends Component {
               <FormattedMessage id="app.login.signup" />
             </Link>*/}
           </div>
-          {/*<Button*/}
-            {/*onClick={this.handleSubmit}*/}
-            {/*type="primary"*/}
-            {/*htmlType="submit"*/}
-          {/*>登录</Button>*/}
           <Submit onClick={this.handleSubmit}>
             <FormattedMessage id="app.login.login" />
           </Submit>

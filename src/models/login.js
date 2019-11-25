@@ -21,6 +21,7 @@ export default {
       });
       // Login successfully
       reloadAuthorized();
+      window.localStorage.setItem('token', response.token);
       const urlParams = new URL(window.location.href);
       const params = getPageQuery();
       let { redirect } = params;

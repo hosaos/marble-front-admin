@@ -32,30 +32,6 @@ export default [
         ],
       },
       {
-        path: '/sample',
-        name: 'sample',
-        icon: 'compass',
-        routes: [
-          {
-            path: '/sample/list',
-            name: 'list',
-            component: './Sample/SampleList',
-          },
-          {
-            path: '/sample/new',
-            name: 'new',
-            hideInMenu: true,
-            component: './Sample/SampleForm',
-          },
-          {
-            path: '/sample/:id',
-            name: 'edit',
-            hideInMenu: true,
-            component: './Sample/SampleForm',
-          },
-        ],
-      },
-      {
         path: '/webUser',
         name: 'webUser',
         icon: 'compass',

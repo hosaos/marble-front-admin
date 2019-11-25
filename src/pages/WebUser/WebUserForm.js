@@ -87,6 +87,10 @@ class WebUserForm extends PureComponent {
                     required: true,
                     message: '姓名为必填项',
                   },
+                  {
+                    whitespace: true,
+                    message: '不能输入空格',
+                  }
                 ],
               })(<Input placeholder="姓名" />)}
             </FormItem>

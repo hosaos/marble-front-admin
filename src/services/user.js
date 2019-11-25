@@ -9,5 +9,6 @@ export async function userLogin(params) {
 
 
 export async function queryCurrent() {
-  return request('/api/currentUser');
+  return request('/api/userInfo/currentUser');
+  // return request('/api/currentUser');
 }
