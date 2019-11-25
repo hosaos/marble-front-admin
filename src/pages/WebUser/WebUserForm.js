@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import router from 'umi/router';
-import { Form, Input, Button, Card, Select } from 'antd';
+import { Form, Input, Button, Card, Select,Radio } from 'antd';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import { formItemLayout, formSubmitLayout } from '@/constants/layout.form';
 
@@ -90,30 +90,41 @@ class WebUserForm extends PureComponent {
                 ],
               })(<Input placeholder="姓名" />)}
             </FormItem>
-            <FormItem {...formItemLayout} label="密码">
-              {getFieldDecorator('password', {
-                initialValue: webUserEntity.name,
-                rules: [
-                  {
-                    required: true,
-                    message: '姓名为必填项',
-                  },
-                ],
-              })(<Input placeholder="密码" />)}
-            </FormItem>
+            {isNew && (
+              <FormItem {...formItemLayout} label="密码">
+                {getFieldDecorator('password', {
+                  rules: [
+                    {
+                      required: true,
+                      message: '密码为必填项',
+                    },
+                    {
+                      min:6,
+                      message: '密码不能少于6个字符',
+                    }
+                  ],
+                })(<Input placeholder="密码" />)}
+              </FormItem>
+            )
+            }
             <FormItem {...formItemLayout} label="手机号">
               {getFieldDecorator('mobile', {
-                initialValue: webUserEntity.name,
+                initialValue: webUserEntity.mobile,
                 rules: [
                   {
                     required: true,
                     message: '手机号为必填项',
                   },
+                  {
+                    pattern: /^1[3|4|5|7|8][0-9]\d{8}$/,
+                    message: '请输入正确的手机号'
+                  }
                 ],
               })(<Input placeholder="姓名" />)}
             </FormItem>
             <FormItem {...formItemLayout} label="角色">
               {getFieldDecorator('role', {
+                initialValue: webUserEntity.role,
                 rules: [
                   {
                     required: true,
@@ -121,15 +132,11 @@ class WebUserForm extends PureComponent {
                   },
                 ],
               })(
-                <Select
-                  showSearch
-                  style={{ width: 200 }}
-                  placeholder="请选择用户角色"
-                >
-                  <Option value="1">代理公司</Option>
-                  <Option value="2">加工厂</Option>
-                  <Option value="3">矿山</Option>
-                </Select>
+                <Radio.Group>
+                  <Radio value={1}>代理公司</Radio>
+                  <Radio value={2}>加工厂</Radio>
+                  <Radio value={3}>矿山</Radio>
+                </Radio.Group>
               )}
             </FormItem>
 

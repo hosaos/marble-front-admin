@@ -36,7 +36,7 @@ class WebUserList extends PureComponent {
     },
     {
       title: '角色',
-      dataIndex: 'role',
+      dataIndex: 'roleDesc',
     },
     {
       title: '创建时间',
@@ -48,7 +48,7 @@ class WebUserList extends PureComponent {
         <Fragment>
           <Link to={`/webUser/${row.id}`}>修改</Link>
           <Divider type="vertical" />
-          <a onClick={() => this.handleDeleteUser(true, row)}>删除</a>
+          <a onClick={() => this.handleDeleteUser(row)}>删除</a>
         </Fragment>
       ),
     },
@@ -62,17 +62,18 @@ class WebUserList extends PureComponent {
     });
   }
 
-  handleDeleteUser() {
+  handleDeleteUser(row) {
     const { dispatch } = this.props;
 
     Modal.confirm({
       title: '删除',
-      content: '确定删除吗？（暂不生效）',
+      content: `确定删除用户"${row.name}"？`,
       okText: '确认',
       cancelText: '取消',
       onOk: () => {
         dispatch({
           type: 'webUser/delete',
+          payload: { id: row.id },
         });
       },
     });

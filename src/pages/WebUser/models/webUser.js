@@ -1,6 +1,6 @@
 import { routerRedux } from 'dva/router';
 import { message } from 'antd';
-import { searchPageList,modifyWebUser } from '@/services/webUser';
+import { searchPageList, modifyWebUser, getWebUser, deleteWebUser } from '@/services/webUser';
 
 const initialState = function getInitialState() {
   return {
@@ -18,18 +18,18 @@ export default {
   state: initialState(),
 
   effects: {
-    // *getSample({ payload }, { call, put }) {
-    //   try {
-    //     const response = yield call(getSample, payload);
-    //     yield put({
-    //       type: 'updateEntity',
-    //       payload: response.data,
-    //     });
-    //   } catch (err) {
-    //     message.error('获取详情失败');
-    //   }
-    // },
-    *modifyWebUser({ payload }, { call, put }) {
+    * getWebUser({ payload }, { call, put }) {
+      try {
+        const response = yield call(getWebUser, payload);
+        yield put({
+          type: 'updateEntity',
+          payload: response,
+        });
+      } catch (err) {
+        message.error('获取详情失败');
+      }
+    },
+    * modifyWebUser({ payload }, { call, put }) {
       try {
         yield call(modifyWebUser, payload);
 
@@ -37,6 +37,17 @@ export default {
         yield put(routerRedux.push('/webUser/list'));
       } catch (err) {
         message.error('保存失败');
+      }
+    },
+    * delete({ payload }, { call, put }) {
+      try {
+        yield call(deleteWebUser, payload);
+
+        message.success('操作成功');
+        yield put({ type: 'search'});
+        console.log("列表加载")
+      } catch (err) {
+        message.error('操作失败');
       }
     },
     * search({ payload = { pageIndex: 1, pageSize: 10 } }, { call, put }) {

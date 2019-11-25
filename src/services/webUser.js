@@ -7,19 +7,19 @@ export async function searchPageList(params = {}) {
   return request(url).then(res => parseSearchResult(res));
 }
 
-// export async function getSample(id) {
-//   return request(`/api/sample/${id}`);
-// }
-//
+export async function getWebUser(id) {
+  return request(`/api/userInfo/detail/${id}`);
+}
+
 export async function modifyWebUser(webUser) {
   return request(`/api/userInfo/saveOrUpdate`, {
     method: 'POST',
     body: webUser,
   });
 }
-
-//   return request(`/api/sample`, {
-//     method: 'POST',
-//     body: sample,
-//   });
-// }
+export async function deleteWebUser(webUser) {
+  return request(`/api/userInfo/delete`, {
+    method: 'POST',
+    body: webUser,
+  });
+}
